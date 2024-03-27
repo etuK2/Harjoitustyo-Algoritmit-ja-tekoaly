@@ -10,6 +10,7 @@ player2_piece = "🟡"
 player1_turn = 0
 player2_turn = 1
 
+move_count = 0
 turn = 0
 
 board = game.create_board(rows, columns)
@@ -36,7 +37,7 @@ while not game_over:
             pass
 
     if turn == player2_turn and not game_over:
-        column, minimax_score = game_ai.minimax(board, 5, float('-inf'), float('inf'), True)
+        column, minimax_score = game_ai.minimax(board, 5, float('-inf'), float('inf'), True, move_count)
         
         if game.check_placement(board, column):
             row = game.next_free_row(board, rows, column)

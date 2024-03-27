@@ -67,65 +67,53 @@ def board_value(board, piece):
 
     return value
 
-def minimax(board, depth, aplha, beta, player):
+def minimax(board, depth, alpha, beta, player, move_count):
 
-    game_over_value = game_over_checker(board)
-
-    free_spaces = game.check_free_spaces(board, columns)
-
-    if depth == 0 or game_over_value:
-        if game_over_value:
-            if game.check_game_end(board, rows, columns, player1_piece):
-                return (None, -1000)
-            
-            elif game.check_game_end(board, rows, columns, player2_piece):
-                return (None, 1000)
-            
-            else:
-                return (None, 0)
-        
-        else:
-            return (None, board_value(board, player2_piece))
+    if depth == 0 or move_count == 42:
+        return (None, board_value(board, player2_piece))
     
-
     if player:
         value = float('-inf')
-
-        column = random.choice(free_spaces)
-
-        for i in free_spaces:
+        column = random.choice(game.check_free_spaces(board, columns))
+        
+        for i in game.check_free_spaces(board, columns):
             row = game.next_free_row(board, rows, i)
             copy = [row[:] for row in board]
             game.place_piece(copy, row, i, player2_piece)
-
-            new_value = minimax(copy, depth-1, aplha, beta, False)[1]
+            
+            if game.check_game_end(copy, rows, columns, player2_piece):
+                return (i, 1000)
+            
+            new_value = minimax(copy, depth - 1, alpha, beta, False, move_count + 1)[1]
             if new_value > value:
                 value = new_value
                 column = i
-
-            aplha = max(value, aplha)
-            if aplha >= beta:
+            
+            alpha = max(value, alpha)
+            if alpha >= beta:
                 break
         
         return column, value
     
-    if player == False:
+    else:
         value = float('inf')
-
-        column = random.choice(free_spaces)
-
-        for i in free_spaces:
+        column = random.choice(game.check_free_spaces(board, columns))
+        
+        for i in game.check_free_spaces(board, columns):
             row = game.next_free_row(board, rows, i)
             copy = [row[:] for row in board]
             game.place_piece(copy, row, i, player1_piece)
-
-            new_value = minimax(copy, depth-1, aplha, beta, True)[1]
+            
+            if game.check_game_end(copy, rows, columns, player1_piece):
+                return (i, -1000)
+            
+            new_value = minimax(copy, depth - 1, alpha, beta, True, move_count + 1)[1]
             if new_value < value:
                 value = new_value
                 column = i
-
+            
             beta = min(value, beta)
-            if aplha >= beta:
+            if alpha >= beta:
                 break
         
         return column, value
