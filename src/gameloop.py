@@ -1,49 +1,50 @@
+"""Module for running the game loop."""
+
 import game
 import game_ai
 
-rows = 6
-columns = 7
+ROWS = 6
+COLUMNS = 7
 
-player1_piece = "🔴"
-player2_piece = "🟡"
+PLAYER1_PIECE = "🔴"
+PLAYER2_PIECE = "🟡"
 
-player1_turn = 0
-player2_turn = 1
+PLAYER1_TURN = 0
+PLAYER2_TURN = 1
 
-move_count = 0
-turn = 0
+MOVE_COUNT = 0
+TURN = 0
 
-board = game.create_board(rows, columns)
-game_over = False
+BOARD = game.create_board(ROWS, COLUMNS)
+GAME_OVER = False
 
-while not game_over:
-    if len(game.check_free_spaces(board, columns)) == 0:
-        game_over = True
+while not GAME_OVER:
+    if len(game.check_free_spaces(BOARD, COLUMNS)) == 0:
+        GAME_OVER = True
         print("Tasapeli")
 
-    if turn == player1_turn and not game_over:
-        game.draw_board(board)
-        column = int(input("Pelaaja 1 anna siirron sarake:"))-1
-        if game.check_placement(board, column):
-            row = game.next_free_row(board, rows, column)
-            game.place_piece(board, row, column, player1_piece)
-            if game.check_game_end(board, rows, columns, player1_piece):
-                game_over = True
-                game.draw_board(board)
+    if TURN == PLAYER1_TURN and not GAME_OVER:
+        game.draw_board(BOARD)
+        column = int(input("Pelaaja 1 anna siirron sarake:")) - 1
+        if game.check_placement(BOARD, column):
+            row = game.next_free_row(BOARD, ROWS, column)
+            game.place_piece(BOARD, row, column, PLAYER1_PIECE)
+            if game.check_game_end(BOARD, ROWS, COLUMNS, PLAYER1_PIECE):
+                GAME_OVER = True
+                game.draw_board(BOARD)
                 print("Pelaaja 1 voitti")
-            turn += 1
+            TURN += 1
         else:
             print("Anna kelvollinen siirto")
-            pass
 
-    if turn == player2_turn and not game_over:
-        column, minimax_score = game_ai.minimax(board, 5, float('-inf'), float('inf'), True, move_count)
-        
-        if game.check_placement(board, column):
-            row = game.next_free_row(board, rows, column)
-            game.place_piece(board, row, column, player2_piece)
-            if game.check_game_end(board, rows, columns, player2_piece):
-                game_over = True
-                game.draw_board(board)
+    if TURN == PLAYER2_TURN and not GAME_OVER:
+        column, _ = game_ai.minimax(BOARD, 5, float('-inf'), float('inf'), True, MOVE_COUNT)
+
+        if game.check_placement(BOARD, column):
+            row = game.next_free_row(BOARD, ROWS, column)
+            game.place_piece(BOARD, row, column, PLAYER2_PIECE)
+            if game.check_game_end(BOARD, ROWS, COLUMNS, PLAYER2_PIECE):
+                GAME_OVER = True
+                game.draw_board(BOARD)
                 print("Pelaaja 2 voitti")
-            turn -= 1
+            TURN -= 1
