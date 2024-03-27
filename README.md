@@ -5,6 +5,8 @@ Harjoitustyönä tehty Connect4 peli, missä pelaaja pelaa tekoälyä vastaan.
 
 [Määrittelydokumentti](./dokumentaatio/maarittelydokumentti.md)
 
+[Käyttöohje](./dokumentaatio/kayttoohje.md)
+
 ## Viikkoraportit
 
 [Viikko 1](./dokumentaatio/viikkoraportit/viikko1.md)

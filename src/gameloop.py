@@ -24,25 +24,30 @@ while not GAME_OVER:
         print("Tasapeli")
 
     if TURN == PLAYER1_TURN and not GAME_OVER:
+        COLUMN = ""
         game.draw_board(BOARD)
-        column = int(input("Pelaaja 1 anna siirron sarake:")) - 1
-        if game.check_placement(BOARD, column):
-            row = game.next_free_row(BOARD, ROWS, column)
-            game.place_piece(BOARD, row, column, PLAYER1_PIECE)
+        while isinstance(COLUMN, int) is False:
+            try:
+                COLUMN = int(input("Pelaaja 1 anna sarakkeen numero:")) - 1
+            except ValueError:
+                COLUMN = 999
+        if 0 <= COLUMN <= 6 and game.check_placement(BOARD, COLUMN):
+            row = game.next_free_row(BOARD, ROWS, COLUMN)
+            game.place_piece(BOARD, row, COLUMN, PLAYER1_PIECE)
             if game.check_game_end(BOARD, ROWS, COLUMNS, PLAYER1_PIECE):
                 GAME_OVER = True
                 game.draw_board(BOARD)
                 print("Pelaaja 1 voitti")
             TURN += 1
         else:
-            print("Anna kelvollinen siirto")
+            print("Syötteen pitää olla luku väliltä 1-7")
 
     if TURN == PLAYER2_TURN and not GAME_OVER:
-        column, _ = game_ai.minimax(BOARD, 5, float('-inf'), float('inf'), True, MOVE_COUNT)
+        COLUMN, _ = game_ai.minimax(BOARD, 5, float('-inf'), float('inf'), True, MOVE_COUNT)
 
-        if game.check_placement(BOARD, column):
-            row = game.next_free_row(BOARD, ROWS, column)
-            game.place_piece(BOARD, row, column, PLAYER2_PIECE)
+        if game.check_placement(BOARD, COLUMN):
+            row = game.next_free_row(BOARD, ROWS, COLUMN)
+            game.place_piece(BOARD, row, COLUMN, PLAYER2_PIECE)
             if game.check_game_end(BOARD, ROWS, COLUMNS, PLAYER2_PIECE):
                 GAME_OVER = True
                 game.draw_board(BOARD)
