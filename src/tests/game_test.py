@@ -101,6 +101,3 @@ class TestConnectFour(unittest.TestCase):
         board = [["X", "O", "X"], ["O", "X", "O"], ["X", "O", "X"]]
         columns = 3
         self.assertEqual(check_free_spaces(board, columns), [])
-
-if __name__ == '__main__':
-    unittest.main()
