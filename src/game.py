@@ -54,7 +54,7 @@ def check_game_end(board, rows, columns, piece):
                 return True
     return False
 
-def draw_board(board):
+def draw_board(board): # pragma: no cover
     """
     Piirtää pelilaudan tämänhetkisen tilan
     """

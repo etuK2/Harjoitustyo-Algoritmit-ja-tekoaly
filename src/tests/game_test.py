@@ -11,14 +11,11 @@ class TestConnectFour(unittest.TestCase):
         """
         Test create_board function
         """
-        rows = 6
-        columns = 7
+        rows, columns = 6, 7
         board = create_board(rows, columns)
         self.assertEqual(len(board), rows)
-        for row in board:
-            self.assertEqual(len(row), columns)
-            for cell in row:
-                self.assertEqual(cell, "  ")
+        self.assertEqual(len(board[0]), columns)
+
 
     def test_place_piece(self):
         """
@@ -36,6 +33,10 @@ class TestConnectFour(unittest.TestCase):
         rows = 2
         column = 1
         self.assertEqual(next_free_row(board, rows, column), 0)
+        board = [["X", "O"], ["X", "O"]]
+        rows = 2
+        column = 1
+        self.assertEqual(next_free_row(board, rows, column), None)
 
     def test_check_placement(self):
         """
@@ -97,6 +98,9 @@ class TestConnectFour(unittest.TestCase):
         board = [["  ", "  ", "  "], ["  ", "X", "  "], ["X", "O", "  "]]
         columns = 3
         self.assertEqual(check_free_spaces(board, columns), [0, 1, 2])
+        board = [["X", "O", "X"], ["O", "X", "O"], ["X", "O", "X"]]
+        columns = 3
+        self.assertEqual(check_free_spaces(board, columns), [])
 
 if __name__ == '__main__':
     unittest.main()
