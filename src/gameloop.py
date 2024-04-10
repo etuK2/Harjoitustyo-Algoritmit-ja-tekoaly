@@ -43,7 +43,8 @@ while not GAME_OVER:
             print("Syötteen pitää olla luku väliltä 1-7")
 
     if TURN == PLAYER2_TURN and not GAME_OVER:
-        COLUMN, _ = game_ai.minimax(BOARD, 5, float('-inf'), float('inf'), True, MOVE_COUNT)
+        COLUMN = game_ai.iterative_deepening(
+            BOARD, 10, float('-inf'), float('inf'), True, MOVE_COUNT, 2)
 
         if game.check_placement(BOARD, COLUMN):
             row = game.next_free_row(BOARD, ROWS, COLUMN)

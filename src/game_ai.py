@@ -1,6 +1,7 @@
 """Connect Four AI Module"""
 
 import random
+import time
 import game
 
 ROWS = 6
@@ -119,3 +120,16 @@ def minimax(board, depth, alpha, beta, player, move_count): #pylint: disable=too
                 break
 
         return column, value
+
+def iterative_deepening(board, max_depth, aplha, beta, player, move_count, time_limit): #pylint: disable=too-many-arguments
+    """
+    Iteratiivinen syveneminen minimax-algoritmiin
+    """
+    start_time = time.time()
+    best_move = None
+    for depth in range(1, max_depth+1):
+        move, _ = minimax(board, depth, aplha, beta, player, move_count)
+        if time.time() - start_time > time_limit:
+            break
+        best_move = move
+    return best_move
