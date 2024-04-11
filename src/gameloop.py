@@ -44,7 +44,8 @@ while not GAME_OVER:
 
     if TURN == PLAYER2_TURN and not GAME_OVER:
         COLUMN = game_ai.iterative_deepening(
-            BOARD, 10, float('-inf'), float('inf'), True, MOVE_COUNT, 2)
+            BOARD, 10, float('-inf'), float('inf'), True,
+              MOVE_COUNT, 2, PLAYER1_PIECE, PLAYER2_PIECE)
 
         if game.check_placement(BOARD, COLUMN):
             row = game.next_free_row(BOARD, ROWS, COLUMN)

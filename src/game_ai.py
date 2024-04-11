@@ -7,14 +7,11 @@ import game
 ROWS = 6
 COLUMNS = 7
 
-PLAYER1_PIECE = "🔴"
-PLAYER2_PIECE = "🟡"
-
-def check_value(area, piece):
+def check_value(area, piece, player1_piece, player2_piece):
     """
     Laskee lähellä olevien nappuloiden arvot
     """
-    opponent_piece = PLAYER1_PIECE if piece == PLAYER2_PIECE else PLAYER2_PIECE
+    opponent_piece = player1_piece if piece == player2_piece else player2_piece
     value = 0
 
     if area.count(piece) == 4:
@@ -30,7 +27,7 @@ def check_value(area, piece):
     return value
 
 
-def board_value(board, piece):
+def board_value(board, piece, player1_piece, player2_piece):
     """
     Laskee pelilaudan arvon
     """
@@ -44,36 +41,36 @@ def board_value(board, piece):
         column = [board[k][i] for k in range(ROWS)]
         for j in range(ROWS - 3):
             area = column[j : j + 4]
-            value += check_value(area, piece)
+            value += check_value(area, piece, player1_piece, player2_piece)
 
     # Vaakasuuntainen arvo
     for i in range(ROWS):
         row = board[i]
         for j in range(COLUMNS - 3):
             area = row[j : j + 4]
-            value += check_value(area, piece)
+            value += check_value(area, piece, player1_piece, player2_piece)
 
     # Vinottaissuuntainen arvo suunnassa "/"
     for i in range(3, ROWS):
         for j in range(COLUMNS - 3):
             area = [board[i - k][j + k] for k in range(4)]
-            value += check_value(area, piece)
+            value += check_value(area, piece, player1_piece, player2_piece)
 
     # Vinottaissuuntainen arvo suunnassa "\"
     for i in range(3, ROWS):
         for j in range(3, COLUMNS):
             area = [board[i - k][j - k] for k in range(4)]
-            value += check_value(area, piece)
+            value += check_value(area, piece, player1_piece, player2_piece)
 
     return value
 
 
-def minimax(board, depth, alpha, beta, player, move_count): #pylint: disable=too-many-arguments
+def minimax(board, depth, alpha, beta, player, move_count, player1_piece, player2_piece): #pylint: disable=too-many-arguments
     """
     Minimax-algoritmi alfa-beeta-karsinnalla
     """
     if depth == 0 or move_count == 42:
-        return None, board_value(board, PLAYER2_PIECE)
+        return None, board_value(board, player2_piece, player1_piece, player2_piece)
 
     if player: #pylint: disable=no-else-return
         value = float("-inf")
@@ -82,12 +79,13 @@ def minimax(board, depth, alpha, beta, player, move_count): #pylint: disable=too
         for i in game.check_free_spaces(board, COLUMNS):
             row = game.next_free_row(board, ROWS, i)
             copy = [row[:] for row in board]
-            game.place_piece(copy, row, i, PLAYER2_PIECE)
+            game.place_piece(copy, row, i, player2_piece)
 
-            if game.check_game_end(copy, ROWS, COLUMNS, PLAYER2_PIECE):
+            if game.check_game_end(copy, ROWS, COLUMNS, player2_piece):
                 return i, 1000
 
-            new_value = minimax(copy, depth - 1, alpha, beta, False, move_count + 1)[1]
+            new_value = minimax(copy, depth - 1, alpha, beta, False,
+                                 move_count + 1, player1_piece, player2_piece)[1]
             if new_value > value:
                 value = new_value
                 column = i
@@ -105,12 +103,13 @@ def minimax(board, depth, alpha, beta, player, move_count): #pylint: disable=too
         for i in game.check_free_spaces(board, COLUMNS):
             row = game.next_free_row(board, ROWS, i)
             copy = [row[:] for row in board]
-            game.place_piece(copy, row, i, PLAYER1_PIECE)
+            game.place_piece(copy, row, i, player1_piece)
 
-            if game.check_game_end(copy, ROWS, COLUMNS, PLAYER1_PIECE):
+            if game.check_game_end(copy, ROWS, COLUMNS, player1_piece):
                 return i, -1000
 
-            new_value = minimax(copy, depth - 1, alpha, beta, True, move_count + 1)[1]
+            new_value = minimax(copy, depth - 1, alpha, beta, True,
+                                 move_count + 1, player1_piece, player2_piece)[1]
             if new_value < value:
                 value = new_value
                 column = i
@@ -121,14 +120,15 @@ def minimax(board, depth, alpha, beta, player, move_count): #pylint: disable=too
 
         return column, value
 
-def iterative_deepening(board, max_depth, aplha, beta, player, move_count, time_limit): #pylint: disable=too-many-arguments
+def iterative_deepening(board, max_depth, aplha, beta, player, move_count, time_limit, player1_piece, player2_piece): #pylint: disable=too-many-arguments, line-too-long
     """
     Iteratiivinen syveneminen minimax-algoritmiin
     """
     start_time = time.time()
     best_move = None
     for depth in range(1, max_depth+1):
-        move, _ = minimax(board, depth, aplha, beta, player, move_count)
+        move, _ = minimax(board, depth, aplha, beta, player,
+                           move_count, player1_piece, player2_piece)
         if time.time() - start_time > time_limit:
             break
         best_move = move

@@ -1,11 +1,11 @@
-"""Test cases for Connect Four game functions."""
+"""Test cases for Connect Four game functions"""
 
 import unittest
 from game import (create_board, place_piece, next_free_row,
                   check_placement, check_game_end, check_free_spaces)
 
 class TestConnectFour(unittest.TestCase):
-    """Test cases for Connect Four game functions."""
+    """Test cases for Connect Four game functions"""
 
     def test_create_board(self):
         """
@@ -15,7 +15,6 @@ class TestConnectFour(unittest.TestCase):
         board = create_board(rows, columns)
         self.assertEqual(len(board), rows)
         self.assertEqual(len(board[0]), columns)
-
 
     def test_place_piece(self):
         """
