@@ -21,6 +21,8 @@ Harjoitustyönä tehty Connect4 peli, missä pelaaja pelaa tekoälyä vastaan.
 
 [Viikko 4](./dokumentaatio/viikkoraportit/viikko4.md)
 
+[Viikko 5](./dokumentaatio/viikkoraportit/viikko5.md)
+
 ## Asennus ja käynnistys
 
 Asenna riippuvuudet komennolla

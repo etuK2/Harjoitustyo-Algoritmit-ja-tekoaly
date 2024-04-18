@@ -7,6 +7,9 @@ import game
 ROWS = 6
 COLUMNS = 7
 
+#Luodaan hajautus taulu
+hash_map = {}
+
 def check_value(area, piece, player1_piece, player2_piece):
     """
     Laskee lähellä olevien nappuloiden arvot
@@ -64,12 +67,33 @@ def board_value(board, piece, player1_piece, player2_piece):
 
     return value
 
+def store(board, best_move):
+    """
+    Talletaa arvon hajautustauluun
+    """
+    board_key = str(board)
+    hash_map[board_key] = best_move
 
-def minimax(board, depth, alpha, beta, player, move_count, player1_piece, player2_piece): #pylint: disable=too-many-arguments
+def retrieve(board):
+    """
+    Hakee arvon hajautustaulusta
+    """
+    board_key = str(board)
+    if board_key in hash_map:
+        return hash_map[board_key]
+    return None
+
+def minimax(board, depth, alpha, beta, player, move_count, player1_piece, player2_piece): #pylint: disable=too-many-arguments, too-many-return-statements, too-many-branches
     """
     Minimax-algoritmi alfa-beeta-karsinnalla
     """
+    best_move = retrieve(board)
+    if best_move is not None:
+        return best_move, board_value(board, player2_piece, player1_piece, player2_piece)
+
     if depth == 0 or move_count == 42:
+        if move_count == 42:
+            return None, 0
         return None, board_value(board, player2_piece, player1_piece, player2_piece)
 
     if player: #pylint: disable=no-else-return
@@ -132,4 +156,5 @@ def iterative_deepening(board, max_depth, aplha, beta, player, move_count, time_
         if time.time() - start_time > time_limit:
             break
         best_move = move
+    store(board, best_move)
     return best_move

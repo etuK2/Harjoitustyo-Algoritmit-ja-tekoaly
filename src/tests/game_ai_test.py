@@ -45,41 +45,54 @@ class TestGameAI(unittest.TestCase):
         """
         player1_piece = "X"
         player2_piece = "O"
+        move_count = 1
         board = [
             ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
             ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
             ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
             ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
             ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "]
+            ["  ", "  ", "  ", "X", "  ", "  ", "  "]
         ]
         depth = 3
         alpha = float("-inf")
         beta = float("inf")
         player = True
-        move_count = 0
+        move_count = 7
         self.assertEqual(minimax(board, depth, alpha, beta, player,
-                                  move_count, player1_piece, player2_piece), (3, 11))
+                                  move_count, player1_piece, player2_piece), (3, 10))
         board = [
             ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
             ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
             ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
             ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["O", "O", "O", "  ", "  ", "  ", "  "]
+            ["  ", "  ", "  ", "  ", "  ", "  ", "X"],
+            ["O", "O", "O", "  ", "X", "X", "X"]
         ]
         self.assertEqual(minimax(board, depth, alpha, beta, player,
                                   move_count, player1_piece, player2_piece), (3, 1000))
+        move_count = 5
         board = [
             ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
             ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
             ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
             ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["X", "X", "X", "  ", "  ", "  ", "  "]
+            ["  ", "  ", "  ", "  ", "  ", "  ", "O"],
+            ["X", "X", "X", "  ", "  ", "  ", "O"]
         ]
         self.assertEqual(minimax(board, depth, alpha, beta, player,
-                                  move_count, player1_piece, player2_piece), (3, 10))
+                                  move_count, player1_piece, player2_piece), (3, 14))
+        move_count = 42
+        board = [
+            ["X", "O", "X", "O", "X", "O", "X"],
+            ["X", "O", "X", "O", "X", "O", "X"],
+            ["O", "X", "O", "X", "O", "X", "O"],
+            ["O", "X", "O", "X", "O", "X", "O"],
+            ["X", "O", "X", "O", "X", "O", "X"],
+            ["X", "O", "X", "O", "X", "O", "X"]
+        ]
+        self.assertEqual(minimax(board, depth, alpha, beta, player,
+                                  move_count, player1_piece, player2_piece), (None, 0))
 
     def test_iterative_deepening(self):
         """
@@ -103,7 +116,7 @@ class TestGameAI(unittest.TestCase):
         time_limit = 2
         self.assertEqual(iterative_deepening(board, max_depth, alpha, beta, player, move_count,
                                               time_limit, player1_piece, player2_piece), 3)
-        max_depth = 10
+        max_depth = 100000
         time_limit = 1
         self.assertEqual(iterative_deepening(board, max_depth, alpha, beta, player, move_count,
                                               time_limit, player1_piece, player2_piece), 3)
