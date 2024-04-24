@@ -139,7 +139,7 @@ def minimax(board, depth, alpha, beta, player, move_count, player1_piece, player
         hash_map[board_key] = column
         return column, value
 
-def iterative_deepening(board, max_depth, aplha, beta, player, move_count, time_limit, player1_piece, player2_piece): #pylint: disable=too-many-arguments, line-too-long
+def iterative_deepening(board, max_depth, alpha, beta, player, move_count, time_limit, player1_piece, player2_piece): #pylint: disable=too-many-arguments, line-too-long
     """
     Iteratiivinen syveneminen minimax-algoritmiin
     """
@@ -147,7 +147,7 @@ def iterative_deepening(board, max_depth, aplha, beta, player, move_count, time_
     start_time = time.time()
     best_move = None
     for depth in range(1, max_depth+1):
-        best_move, _ = minimax(board, depth, aplha, beta, player,
+        best_move, _ = minimax(board, depth, alpha, beta, player,
                            move_count, player1_piece, player2_piece, hash_map)
         if time.time() - start_time > time_limit:
             break
