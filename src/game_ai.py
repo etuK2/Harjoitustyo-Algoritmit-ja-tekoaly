@@ -16,12 +16,12 @@ def check_value(area, piece, player1_piece, player2_piece):
 
     if area.count(piece) == 4:
         value += 100
-    elif area.count(piece) == 3 and area.count("  ") == 1:
+    elif area.count(piece) == 3 and area.count(0) == 1:
         value += 5
-    elif area.count(piece) == 2 and area.count("  ") == 2:
+    elif area.count(piece) == 2 and area.count(0) == 2:
         value += 2
 
-    if area.count(opponent_piece) == 3 and area.count("  ") == 1:
+    if area.count(opponent_piece) == 3 and area.count(0) == 1:
         value -= 4
 
     return value

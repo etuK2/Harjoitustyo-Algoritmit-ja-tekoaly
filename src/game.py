@@ -4,7 +4,7 @@ def create_board(rows, columns):
     """
     Luo pelilaudan annetujen rivien ja sarakkeiden määrän perusteella
     """
-    board = [["  " for _ in range(columns)] for _ in range(rows)]
+    board = [[0 for _ in range(columns)] for _ in range(rows)]
     return board
 
 def place_piece(board, row, column, piece):
@@ -18,7 +18,7 @@ def next_free_row(board, rows, column):
     Katsoo millä rivillä kyseisessä sarakkeessa on seuraava vapaa paikka
     """
     for i in range(rows-1, -1, -1):
-        if board[i][column] == "  ":
+        if board[i][column] == 0:
             return i
     return None
 
@@ -26,7 +26,7 @@ def check_placement(board, column):
     """
     Tarkistaa onko läyttäjän antama syöte kelvollinen
     """
-    return board[0][column] == "  "
+    return board[0][column] == 0
 
 def check_game_end(board, rows, columns, piece):
     """
@@ -58,7 +58,15 @@ def draw_board(board): # pragma: no cover
     """
     Piirtää pelilaudan tämänhetkisen tilan
     """
-    for row in board:
+    for i in board:
+        row = []
+        for j in i:
+            if j == 0:
+                row.append("  ")
+            if j == 1:
+                row.append("🔴")
+            if j == 2:
+                row.append("🟡")
         print(row)
 
 def check_free_spaces(board, columns):

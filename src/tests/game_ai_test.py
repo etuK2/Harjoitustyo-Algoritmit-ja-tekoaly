@@ -10,49 +10,49 @@ class TestGameAI(unittest.TestCase):
         """
         Test check_value function
         """
-        player1_piece = "X"
-        player2_piece = "O"
-        piece = "X"
-        area = ["X", "X", "X", "X"]
+        player1_piece = 1
+        player2_piece = 2
+        piece = 1
+        area = [1, 1, 1, 1]
         self.assertEqual(check_value(area, piece, player1_piece, player2_piece), 100)
-        area = ["X", "X", "  ", "X"]
+        area = [1, 1, 0, 1]
         self.assertEqual(check_value(area, piece, player1_piece, player2_piece), 5)
-        area = ["X", "  ", "  ", "X"]
+        area = [1, 0, 0, 1]
         self.assertEqual(check_value(area, piece, player1_piece, player2_piece), 2)
-        area = ["O", "O", "  ", "O"]
+        area = [2, 2, 0, 2]
         self.assertEqual(check_value(area, piece, player1_piece, player2_piece), -4)
 
     def test_board_value(self):
         """
         Test board_value function
         """
-        player1_piece = "X"
-        player2_piece = "O"
+        player1_piece = 1
+        player2_piece = 2
         board = [
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "]
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0]
         ]
-        piece = "X"
+        piece = 1
         self.assertEqual(board_value(board, piece, player1_piece, player2_piece), 0)
 
     def test_minimax(self):
         """
         Test minimax function
         """
-        player1_piece = "X"
-        player2_piece = "O"
+        player1_piece = 1
+        player2_piece = 2
         move_count = 1
         board = [
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["  ", "  ", "  ", "X", "  ", "  ", "  "]
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 1, 0, 0, 0]
         ]
         depth = 3
         alpha = float("-inf")
@@ -60,53 +60,53 @@ class TestGameAI(unittest.TestCase):
         player = True
         move_count = 7
         self.assertEqual(minimax(board, depth, alpha, beta, player,
-                                  move_count, player1_piece, player2_piece), (3, 10))
+                                  move_count, player1_piece, player2_piece, hash_map={}), (3, 10))
         board = [
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["  ", "  ", "  ", "  ", "  ", "  ", "X"],
-            ["O", "O", "O", "  ", "X", "X", "X"]
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1],
+            [2, 2, 2, 0, 1, 1, 1]
         ]
         self.assertEqual(minimax(board, depth, alpha, beta, player,
-                                  move_count, player1_piece, player2_piece), (3, 1000))
+                                  move_count, player1_piece, player2_piece, hash_map={}), (3, 1000))
         move_count = 5
         board = [
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["  ", "  ", "  ", "  ", "  ", "  ", "O"],
-            ["X", "X", "X", "  ", "  ", "  ", "O"]
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 2],
+            [1, 1, 1, 0, 0, 0, 2]
         ]
         self.assertEqual(minimax(board, depth, alpha, beta, player,
-                                  move_count, player1_piece, player2_piece), (3, 14))
+                                move_count, player1_piece, player2_piece, hash_map={}), (3, 14))
         move_count = 42
         board = [
-            ["X", "O", "X", "O", "X", "O", "X"],
-            ["X", "O", "X", "O", "X", "O", "X"],
-            ["O", "X", "O", "X", "O", "X", "O"],
-            ["O", "X", "O", "X", "O", "X", "O"],
-            ["X", "O", "X", "O", "X", "O", "X"],
-            ["X", "O", "X", "O", "X", "O", "X"]
+            [1, 2, 1, 2, 1, 2, 1],
+            [1, 2, 1, 2, 1, 2, 1],
+            [2, 1, 2, 1, 2, 1, 2],
+            [2, 1, 2, 1, 2, 1, 2],
+            [1, 2, 1, 2, 1, 2, 1],
+            [1, 2, 1, 2, 1, 2, 1]
         ]
         self.assertEqual(minimax(board, depth, alpha, beta, player,
-                                  move_count, player1_piece, player2_piece), (None, 0))
+                                  move_count, player1_piece, player2_piece, hash_map={}), (None, 0))
 
     def test_iterative_deepening(self):
         """
         Test iterative_deepening function
         """
-        player1_piece = "X"
-        player2_piece = "O"
+        player1_piece = 1
+        player2_piece = 2
         board = [
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "],
-            ["  ", "  ", "  ", "  ", "  ", "  ", "  "]
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0]
         ]
         max_depth = 3
         alpha = float("-inf")

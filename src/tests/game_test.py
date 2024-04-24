@@ -20,19 +20,19 @@ class TestConnectFour(unittest.TestCase):
         """
         Test place_piece function
         """
-        board = [["  ", "  "], ["  ", "  "]]
-        place_piece(board, 0, 0, "X")
-        self.assertEqual(board[0][0], "X")
+        board = [[0, 0], [0, 0]]
+        place_piece(board, 0, 0, 1)
+        self.assertEqual(board[0][0], 1)
 
     def test_next_free_row(self):
         """
         Test next_free_row function
         """
-        board = [["X", "  "], ["X", "O"]]
+        board = [[1, 0], [1, 2]]
         rows = 2
         column = 1
         self.assertEqual(next_free_row(board, rows, column), 0)
-        board = [["X", "O"], ["X", "O"]]
+        board = [[1, 2], [1, 2]]
         rows = 2
         column = 1
         self.assertEqual(next_free_row(board, rows, column), None)
@@ -41,7 +41,7 @@ class TestConnectFour(unittest.TestCase):
         """
         Test check_placement function
         """
-        board = [["  ", "O"], ["  ", "X"]]
+        board = [[0, 2], [0, 1]]
         self.assertTrue(check_placement(board, 0))
         self.assertFalse(check_placement(board, 1))
 
@@ -49,54 +49,54 @@ class TestConnectFour(unittest.TestCase):
         """
         Test check_game_end function
         """
-        board = [["X", "  ", "  ", "  "],
-                 ["X", "O", "  ", "  "],
-                 ["X", "O", "  ", "  "],
-                 ["X", "O", "  ", "  "]]
+        board = [[1, 0, 0, 0],
+                 [1, 2, 0, 0],
+                 [1, 2, 0, 0],
+                 [1, 2, 0, 0]]
         rows = 4
         columns = 4
-        piece = "X"
+        piece = 1
         self.assertTrue(check_game_end(board, rows, columns, piece))
-        board = [["  ", "  ", "  ", "  "],
-                 ["X", "O", "  ", "  "],
-                 ["X", "X", "X", "X"],
-                 ["X", "O", "O", "O"]]
+        board = [[0, 0, 0, 0],
+                 [1, 2, 0, 0],
+                 [1, 1, 1, 1],
+                 [1, 2, 2, 2]]
         rows = 4
         columns = 4
-        piece = "X"
+        piece = 1
         self.assertTrue(check_game_end(board, rows, columns, piece))
-        board = [["  ", "  ", "  ", "X"],
-                 ["  ", "O", "X", "O"],
-                 ["X", "X", "O", "O"],
-                 ["X", "O", "O", "O"]]
+        board = [[0, 0, 0, 1],
+                 [0, 2, 1, 2],
+                 [1, 1, 2, 2],
+                 [1, 2, 2, 2]]
         rows = 4
         columns = 4
-        piece = "X"
+        piece = 1
         self.assertTrue(check_game_end(board, rows, columns, piece))
-        board = [["X", "  ", "  ", "  "],
-                 ["O", "X", "  ", "  "],
-                 ["X", "O", "X", "O"],
-                 ["X", "O", "O", "X"]]
+        board = [[1, 0, 0, 0],
+                 [2, 1, 0, 0],
+                 [1, 2, 1, 2],
+                 [1, 2, 2, 1]]
         rows = 4
         columns = 4
-        piece = "X"
+        piece = 1
         self.assertTrue(check_game_end(board, rows, columns, piece))
-        board = [["  ", "  ", "  ", "  "],
-                 ["  ", "O", "X", "O"],
-                 ["X", "X", "O", "O"],
-                 ["X", "O", "O", "O"]]
+        board = [[0, 0, 0, 0],
+                 [0, 2, 1, 2],
+                 [1, 1, 2, 2],
+                 [1, 2, 2, 2]]
         rows = 4
         columns = 4
-        piece = "X"
+        piece = 1
         self.assertFalse(check_game_end(board, rows, columns, piece))
 
     def test_check_free_spaces(self):
         """
         Test check_free_spaces function
         """
-        board = [["  ", "  ", "  "], ["  ", "X", "  "], ["X", "O", "  "]]
+        board = [[0, 0, 0], [0, 1, 0], [1, 2, 0]]
         columns = 3
         self.assertEqual(check_free_spaces(board, columns), [0, 1, 2])
-        board = [["X", "O", "X"], ["O", "X", "O"], ["X", "O", "X"]]
+        board = [[1, 2, 1], [2, 1, 2], [1, 2, 1]]
         columns = 3
         self.assertEqual(check_free_spaces(board, columns), [])
