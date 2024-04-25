@@ -75,6 +75,7 @@ def minimax(board, depth, alpha, beta, player, move_count, player1_piece, player
     if depth == 0:
         return None, board_value(board, player2_piece, player1_piece, player2_piece)
     
+    # Luo listan missä vapaat paikat on järjestetty niin, että ne jotka ovat lähempänä keskussaraketta tulevat ensin
     ordered_columns = sorted(game.check_free_spaces(board, COLUMNS), key=lambda x: abs(x - COLUMNS // 2))
 
     if player: #pylint: disable=no-else-return

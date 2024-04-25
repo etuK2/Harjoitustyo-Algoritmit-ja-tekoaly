@@ -4,4 +4,6 @@ Perehdyin ensimmäisellä viikolla kurssimateriaaliin ja valitsen aiheen sekä o
 
 Itse ohjelmaa en ole vielä aloittanut.
 
+Käytin työhöni tällä viikolla 7 tuntia.
+
 Ensiviikolla alan tekemään ohjelmalleni perusteita.
