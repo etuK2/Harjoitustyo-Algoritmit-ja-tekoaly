@@ -120,6 +120,8 @@ class TestGameAI(unittest.TestCase):
         time_limit = 1
         self.assertEqual(iterative_deepening(board, max_depth, alpha, beta, player, move_count,
                                               time_limit, player1_piece, player2_piece), 3)
+        # Tästä eteen päin laudat kuvaavat yhtä peliä, missä tarkistetaan
+        # huomaako ai voiton ja tekeekö ai parhaan siirron joka kierroksella
         board = [
             [0, 0, 0, 1, 0, 0, 0],
             [0, 1, 2, 2, 2, 0, 0],
@@ -130,7 +132,8 @@ class TestGameAI(unittest.TestCase):
         ]
         max_depth = 10
         time_limit = 2
-        # Voitto ai:lle 9 liikkeenpäässä siirroilla sarakkeisiin [Ai(nappula 2): 3] ja [Pelaaja(nappula 1): 5]
+        # Voitto ai:lle 9 liikkeenpäässä siirroilla sarakkeisiin
+        # [Ai(nappula 2): 3] ja [Pelaaja(nappula 1): 5]
         self.assertEqual(iterative_deepening(board, max_depth, alpha, beta, player, move_count,
                                               time_limit, player1_piece, player2_piece), 2)
         board = [
@@ -142,7 +145,8 @@ class TestGameAI(unittest.TestCase):
             [2, 2, 1, 2, 1, 0, 0]
         ]
         max_depth = 9
-        # Voitto ai:lle 8 liikkeenpäässä siirroilla sarakkeisiin [Ai(nappula 2): 2] ja [Pelaaja(nappula 1): 1]
+        # Voitto ai:lle 8 liikkeenpäässä siirroilla sarakkeisiin
+        # [Ai(nappula 2): 2] ja [Pelaaja(nappula 1): 1]
         self.assertEqual(iterative_deepening(board, max_depth, alpha, beta, player, move_count,
                                               time_limit, player1_piece, player2_piece), 1)
         board = [
@@ -154,7 +158,8 @@ class TestGameAI(unittest.TestCase):
             [2, 2, 1, 2, 1, 0, 0]
         ]
         max_depth = 8
-        # Voitto ai:lle 7 liikkeenpäässä siirroilla sarakkeisiin [Ai(nappula 2): 6] ja [Pelaaja(nappula 1): 6]
+        # Voitto ai:lle 7 liikkeenpäässä siirroilla sarakkeisiin
+        # [Ai(nappula 2): 6] ja [Pelaaja(nappula 1): 6]
         self.assertEqual(iterative_deepening(board, max_depth, alpha, beta, player, move_count,
                                               time_limit, player1_piece, player2_piece), 5)
         board = [
@@ -166,7 +171,8 @@ class TestGameAI(unittest.TestCase):
             [2, 2, 1, 2, 1, 2, 0]
         ]
         max_depth = 7
-        # Voitto ai:lle 6 liikkeenpäässä siirroilla sarakkeisiin [Ai(nappula 2): 6] ja [Pelaaja(nappula 1): 1]
+        # Voitto ai:lle 6 liikkeenpäässä siirroilla sarakkeisiin
+        # [Ai(nappula 2): 6] ja [Pelaaja(nappula 1): 1]
         self.assertEqual(iterative_deepening(board, max_depth, alpha, beta, player, move_count,
                                               time_limit, player1_piece, player2_piece), 5)
         board = [
@@ -178,7 +184,8 @@ class TestGameAI(unittest.TestCase):
             [2, 2, 1, 2, 1, 2, 0]
         ]
         max_depth = 6
-        # Voitto ai:lle 5 liikkeenpäässä siirroilla sarakkeisiin [Ai(nappula 2): 1] ja [Pelaaja(nappula 1): 7]
+        # Voitto ai:lle 5 liikkeenpäässä siirroilla sarakkeisiin
+        # [Ai(nappula 2): 1] ja [Pelaaja(nappula 1): 7]
         self.assertEqual(iterative_deepening(board, max_depth, alpha, beta, player, move_count,
                                               time_limit, player1_piece, player2_piece), 0)
         board = [
@@ -190,7 +197,8 @@ class TestGameAI(unittest.TestCase):
             [2, 2, 1, 2, 1, 2, 1]
         ]
         max_depth = 5
-        # Voitto ai:lle 4 liikkeenpäässä siirroilla sarakkeisiin [Ai(nappula 2): 7] ja [Pelaaja(nappula 1): 7]
+        # Voitto ai:lle 4 liikkeenpäässä siirroilla sarakkeisiin
+        # [Ai(nappula 2): 7] ja [Pelaaja(nappula 1): 7]
         self.assertEqual(iterative_deepening(board, max_depth, alpha, beta, player, move_count,
                                               time_limit, player1_piece, player2_piece), 6)
         board = [
@@ -202,7 +210,8 @@ class TestGameAI(unittest.TestCase):
             [2, 2, 1, 2, 1, 2, 1]
         ]
         max_depth = 4
-        # Voitto ai:lle 3 liikkeenpäässä siirroilla sarakkeisiin [Ai(nappula 2): 7] ja [Pelaaja(nappula 1): 7]
+        # Voitto ai:lle 3 liikkeenpäässä siirroilla sarakkeisiin
+        # [Ai(nappula 2): 7] ja [Pelaaja(nappula 1): 7]
         self.assertEqual(iterative_deepening(board, max_depth, alpha, beta, player, move_count,
                                               time_limit, player1_piece, player2_piece), 6)
         board = [
@@ -214,7 +223,8 @@ class TestGameAI(unittest.TestCase):
             [2, 2, 1, 2, 1, 2, 1]
         ]
         max_depth = 3
-        # Voitto ai:lle 2 liikkeenpäässä siirroilla sarakkeisiin [Ai(nappula 2): 7] ja [Pelaaja(nappula 1): 6]
+        # Voitto ai:lle 2 liikkeenpäässä siirroilla sarakkeisiin
+        # [Ai(nappula 2): 7] ja [Pelaaja(nappula 1): 6]
         self.assertEqual(iterative_deepening(board, max_depth, alpha, beta, player, move_count,
                                               time_limit, player1_piece, player2_piece), 6)
         board = [
@@ -226,6 +236,7 @@ class TestGameAI(unittest.TestCase):
             [2, 2, 1, 2, 1, 2, 1]
         ]
         max_depth = 3
-        # Voitto ai:lle 1 liikkeenpäässä siirroilla sarakkeisiin [Ai(nappula 2): 6]
+        # Voitto ai:lle 1 liikkeenpäässä siirroilla sarakkeisiin
+        # [Ai(nappula 2): 6]
         self.assertEqual(iterative_deepening(board, max_depth, alpha, beta, player, move_count,
                                               time_limit, player1_piece, player2_piece), 5)

@@ -65,7 +65,7 @@ def board_value(board, piece, player1_piece, player2_piece):
     return value
 
 
-def minimax(board, depth, alpha, beta, player, move_count, player1_piece, player2_piece, hash_map): #pylint: disable=too-many-arguments, too-many-return-statements, too-many-branches
+def minimax(board, depth, alpha, beta, player, move_count, player1_piece, player2_piece, hash_map): #pylint: disable=too-many-arguments, too-many-return-statements, too-many-branches, too-many-locals
     """
     Minimax-algoritmi alfa-beeta-karsinnalla
     """
@@ -74,9 +74,11 @@ def minimax(board, depth, alpha, beta, player, move_count, player1_piece, player
 
     if depth == 0:
         return None, board_value(board, player2_piece, player1_piece, player2_piece)
-    
-    # Luo listan missä vapaat paikat on järjestetty niin, että ne jotka ovat lähempänä keskussaraketta tulevat ensin
-    ordered_columns = sorted(game.check_free_spaces(board, COLUMNS), key=lambda x: abs(x - COLUMNS // 2))
+
+    # Luo listan missä vapaat paikat on järjestetty niin,
+    # että ne jotka ovat lähempänä keskussaraketta tulevat ensin
+    ordered_columns = sorted(game.check_free_spaces(board, COLUMNS),
+                              key=lambda x: abs(x - COLUMNS // 2))
 
     if player: #pylint: disable=no-else-return
         value = float("-inf")
@@ -105,7 +107,7 @@ def minimax(board, depth, alpha, beta, player, move_count, player1_piece, player
             alpha = max(value, alpha)
             if alpha >= beta:
                 break
-        
+
         hash_map[board_key] = column
         return column, value
 
@@ -136,7 +138,7 @@ def minimax(board, depth, alpha, beta, player, move_count, player1_piece, player
             beta = min(value, beta)
             if alpha >= beta:
                 break
-        
+
         hash_map[board_key] = column
         return column, value
 
