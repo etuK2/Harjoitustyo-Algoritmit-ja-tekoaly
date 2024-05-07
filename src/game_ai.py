@@ -82,7 +82,7 @@ def minimax(board, depth, alpha, beta, player, move_count, player1_piece, player
 
     if player: #pylint: disable=no-else-return
         value = float("-inf")
-        column = random.choice(game.check_free_spaces(board, COLUMNS))
+        column = 0
 
         board_key = str(board)
         best_move = hash_map.get(board_key)
@@ -113,7 +113,7 @@ def minimax(board, depth, alpha, beta, player, move_count, player1_piece, player
 
     else:
         value = float("inf")
-        column = random.choice(game.check_free_spaces(board, COLUMNS))
+        column = 0
 
         board_key = str(board)
         best_move = hash_map.get(board_key)

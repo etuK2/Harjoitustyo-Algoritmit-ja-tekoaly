@@ -20,7 +20,7 @@ Aika- ja tilavaativuudet voidaan arvioida erikseen kullekin osalle ohjelmaa:
 
 ## Suorituskyky- ja O-analyysivertailu
 
-Ohjelman suorituskykyyn vaikuttaa pelilaudan koko, tekoälyn käyttö ja syvyysraja minimax-algoritmissa. Koska Connect Four -pelin pelilaudan koko on kiinteä, suorituskykyä voidaan optimoida lähinnä tekoälyn osalta. Käytetyn tekoälyn algoritmi mahdollistaa hyvän suorituskyvyn verrattuna bruteforce-tarkistukseen, mutta syvien etsintäpuiden kanssa algoritmi voi olla hidasta. Iteratiivinen syveneminen parantaa suorituskykyä antamalla aikarajan jokaiselle siirrolle.
+Ohjelman suorituskykyyn vaikuttaa pelilaudan koko, tekoälyn käyttö ja syvyysraja minimax-algoritmissa. Koska Connect Four -pelin pelilaudan koko on kiinteä, suorituskykyä voidaan optimoida lähinnä tekoälyn osalta. Käytetyn tekoälyn algoritmi mahdollistaa hyvän suorituskyvyn verrattuna bruteforce-tarkistukseen, mutta syvien etsintäpuiden kanssa algoritmi voi olla hidasta. Iteratiivinen syveneminen parantaa suorituskykyä antamalla aikarajan jokaiselle siirrolle. Ilman määriteetyä syvyyttä parin sekuntin aikarajalla, peli ehtii käydä noin syvyyteen 10+ asti jokaisella siirrolla. Suurin saavuttamani syvyys satunnaospelaamisella oli kuitenkin vähän vajaa 30000.
 
 ## Työn mahdolliset puutteet ja parannusehdotukset
 
